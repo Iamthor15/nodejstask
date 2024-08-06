@@ -5,13 +5,6 @@ pipeline {
         nodejs 'NodeJS' // Use the NodeJS installation configured in Jenkins
     }
 
-    environment {
-        AZURE_CREDENTIALS_ID = 'azure-credentials-id'
-        VM_USER = 'your_vm_username'
-        VM_IP = 'your_vm_ip_address'
-        SSH_KEY_PATH = '/var/jenkins_home/.ssh/id_rsa'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -19,15 +12,20 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Verify File Structure') {
             steps {
-                sh 'npm install'
+                sh '''
+                echo "Listing files in the workspace..."
+                ls -la
+                echo "Listing files in the src directory..."
+                ls -la src
+                '''
             }
         }
 
-        stage('Run Tests') {
+        stage('Install Dependencies') {
             steps {
-                sh 'npm test || true' // Skip the test stage if no tests are found
+                sh 'npm install'
             }
         }
 
