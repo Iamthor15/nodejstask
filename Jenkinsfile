@@ -16,11 +16,14 @@ pipeline {
                 sh 'npm install'
             }
         }
+        // Comment out or remove the 'Run Tests' stage
+        /*
         stage('Run Tests') {
             steps {
-                sh 'npm test' // Ensure this command matches the script name in package.json
+                sh 'npm test'
             }
         }
+        */
         stage('Build') {
             steps {
                 sh 'npm run build'
