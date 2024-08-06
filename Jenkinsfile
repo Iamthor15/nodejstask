@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                sh 'npm test' // Ensure this command matches the script name in package.json
             }
         }
         stage('Build') {
